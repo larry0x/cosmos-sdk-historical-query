@@ -61,8 +61,6 @@ async fn main() -> anyhow::Result<()> {
         }
     }
 
-    // DelegationResponse doesn't implement serde::Serialize, so we can't print
-    // it out in pretty JSON as we can for the other two languages
     dbg!(delegations);
 
     Ok(())
