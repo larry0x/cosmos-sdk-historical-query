@@ -33,9 +33,11 @@ func main() {
 		panic(err)
 	}
 
-	cdc := codec.NewProtoCodec(codectypes.NewInterfaceRegistry())
-	delegations := []delegation{}
-	next := []byte{}
+	var (
+		cdc         = codec.NewProtoCodec(codectypes.NewInterfaceRegistry())
+		delegations = []delegation{}
+		next        = []byte{}
+	)
 
 	for {
 		fmt.Printf("performing query... next=\"%s\"\n", hex.EncodeToString(next))
