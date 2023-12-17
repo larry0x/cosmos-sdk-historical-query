@@ -1,6 +1,6 @@
 # cosmos-sdk-historical-query
 
-Sample code for querying a Cosmos chain at a historical block height, in Rust and JavaScript.
+Sample code for querying a Cosmos chain at a historical block height, in Rust, Go, and JavaScript.
 
 In addition, the example persented here is a paginated query, meaning it may take more than one query to retrieve the full result. We show how to do this using a loop.
 
@@ -13,7 +13,14 @@ cd rust
 cargo run
 ```
 
-NodeJS:
+Go:
+
+```bash
+cd go
+go run main.go
+```
+
+JavaScript:
 
 ```bash
 cd js
