@@ -1,7 +1,6 @@
 #!/bin/bash
 
 rpcUrl="https://celestia-rpc.mesa.newmetric.xyz:443"
-queryPath="/cosmos.staking.v1beta1.Query/DelegatorDelegations"
 delegatorAddr="celestia15rpm3yhl76ps7s74nu5pg06atpz70slal4kdk2"
 height=123
 limit=10
