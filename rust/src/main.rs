@@ -9,9 +9,9 @@ use {
     tendermint_rpc::{Client, HttpClient},
 };
 
-const RPC_ENDPOINT:   &str = "https://celestia-rpc.mesa.newmetric.xyz";
-const DELEGATOR:      &str = "celestia15rpm3yhl76ps7s74nu5pg06atpz70slal4kdk2";
-const QUERY_TYPE_URL: &str = "/cosmos.staking.v1beta1.Query/DelegatorDelegations";
+const RPC_URL:        &str = "https://celestia-rpc.mesa.newmetric.xyz";
+const QUERY_PATH:     &str = "/cosmos.staking.v1beta1.Query/DelegatorDelegations";
+const DELEGATOR_ADDR: &str = "celestia15rpm3yhl76ps7s74nu5pg06atpz70slal4kdk2";
 const HEIGHT:         u32  = 123;
 const LIMIT:          u64  = 10;
 
@@ -23,7 +23,7 @@ struct Delegation {
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
-    let abci_client = HttpClient::new(RPC_ENDPOINT)?;
+    let abci_client = HttpClient::new(RPC_URL)?;
 
     let mut delegations = vec![];
     let mut next = vec![];
@@ -32,7 +32,7 @@ async fn main() -> anyhow::Result<()> {
         println!("performing query... next=\"{}\"", hex::encode(&next));
 
         let query = QueryDelegatorDelegationsRequest {
-            delegator_addr: DELEGATOR.into(),
+            delegator_addr: DELEGATOR_ADDR.into(),
             pagination: Some(PageRequest {
                 key:   next,
                 limit: LIMIT,
@@ -42,7 +42,7 @@ async fn main() -> anyhow::Result<()> {
 
         let abci_res = abci_client
             .abci_query(
-                Some(QUERY_TYPE_URL.into()),
+                Some(QUERY_PATH.into()),
                 query.encode_to_vec(),
                 Some(HEIGHT.into()),
                 false,
