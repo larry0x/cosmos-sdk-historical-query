@@ -1,0 +1,8 @@
+# rust
+**/target/
+
+# javascript
+**/node_modules/
+
+# macOS
+**/.DS_Store
