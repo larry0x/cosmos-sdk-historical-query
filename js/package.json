@@ -1,0 +1,10 @@
+{
+  "name": "cosmos-sdk-historical-query",
+  "version": "0.0.0",
+  "author": "Larry Lyu <gm@larry.engineer>",
+  "dependencies": {
+    "@cosmjs/stargate": "^0.32.1",
+    "@cosmjs/tendermint-rpc": "^0.32.1",
+    "cosmjs-types": "^0.9.0"
+  }
+}
