@@ -36,16 +36,26 @@ performing query... next="14ab2bc85eaa365c4cf39f6a7525b44fef8264512e"
 performing query... next="14dbfdb0af1e9dc4a05a94074e6c900b29550b2dad"
 [
   {
-    "validator": "celestiavaloper1qx43f066sh6728avms4qq09cj2a3mg83dgjh22",
-    "amount": 350000000000
+    "delegation": {
+      "delegator_address": "celestia15rpm3yhl76ps7s74nu5pg06atpz70slal4kdk2",
+      "validator_address": "celestiavaloper1qx43f066sh6728avms4qq09cj2a3mg83dgjh22",
+      "shares": "350000000000.000000000000000000"
+    },
+    "balance": {
+      "denom": "utia",
+      "amount": "350000000000"
+    }
   },
   {
-    "validator": "celestiavaloper1qxeza0sa037u35p3ze8p7ka7emajvydnyjlp07",
-    "amount": 350000000000
-  },
-  {
-    "validator": "celestiavaloper1pavac9yrlgwyw6v9yx84sttc96n9ee9zrja2u7",
-    "amount": 350000000000
+    "delegation": {
+      "delegator_address": "celestia15rpm3yhl76ps7s74nu5pg06atpz70slal4kdk2",
+      "validator_address": "celestiavaloper1qxeza0sa037u35p3ze8p7ka7emajvydnyjlp07",
+      "shares": "350000000000.000000000000000000"
+    },
+    "balance": {
+      "denom": "utia",
+      "amount": "350000000000"
+    }
   },
 ...more
 ```

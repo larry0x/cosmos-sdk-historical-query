@@ -37,14 +37,9 @@ const LIMIT          = BigInt(10);
 
     const response = QueryDelegatorDelegationsResponse.decode(abciRes.value);
 
-    delegations = delegations.concat(response.delegationResponses.map((res) => {
-      return {
-        validator: res.delegation.validatorAddress,
-        amount:    Number(res.balance.amount),
-      };
-    }));
-
+    delegations = delegations.concat(response.delegationResponses);
     next = response.pagination.nextKey;
+
     if (next.length === 0) {
       break;
     }

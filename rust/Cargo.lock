@@ -224,7 +224,6 @@ dependencies = [
  "cosmos-sdk-proto",
  "hex",
  "prost",
- "serde",
  "serde_json",
  "tendermint",
  "tendermint-rpc",

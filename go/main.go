@@ -22,11 +22,6 @@ const (
 	limit         uint64 = 10
 )
 
-type delegation struct {
-	Validator string `json:"validator"`
-	Amount    uint64 `json:"amount"`
-}
-
 func main() {
 	client, err := cmthttpclient.New(rpcURL, "/websocket")
 	if err != nil {
@@ -35,7 +30,7 @@ func main() {
 
 	var (
 		cdc         = codec.NewProtoCodec(codectypes.NewInterfaceRegistry())
-		delegations = []delegation{}
+		delegations = []stakingtypes.DelegationResponse{}
 		next        = []byte{}
 	)
 
@@ -79,14 +74,9 @@ func main() {
 			panic(err)
 		}
 
-		for _, delegationRes := range response.DelegationResponses {
-			delegations = append(delegations, delegation{
-				Validator: delegationRes.Delegation.ValidatorAddress,
-				Amount:    delegationRes.Balance.Amount.Uint64(),
-			})
-		}
-
+		delegations = append(delegations, response.DelegationResponses...)
 		next = response.Pagination.NextKey
+
 		if len(next) == 0 {
 			break
 		}

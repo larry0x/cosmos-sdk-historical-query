@@ -4,7 +4,6 @@ use {
         staking::v1beta1::{QueryDelegatorDelegationsRequest, QueryDelegatorDelegationsResponse},
     },
     prost::Message,
-    serde::Serialize,
     tendermint::abci::Code,
     tendermint_rpc::{Client, HttpClient},
 };
@@ -14,12 +13,6 @@ const QUERY_PATH:     &str = "/cosmos.staking.v1beta1.Query/DelegatorDelegations
 const DELEGATOR_ADDR: &str = "celestia15rpm3yhl76ps7s74nu5pg06atpz70slal4kdk2";
 const HEIGHT:         u32  = 123;
 const LIMIT:          u64  = 10;
-
-#[derive(Debug, Serialize)]
-struct Delegation {
-    validator: String,
-    amount:    u128,
-}
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
@@ -60,23 +53,17 @@ async fn main() -> anyhow::Result<()> {
 
         let response = QueryDelegatorDelegationsResponse::decode(abci_res.value.as_slice())?;
 
-        delegations.extend(
-            response
-                .delegation_responses
-                .into_iter()
-                .map(|res| Delegation {
-                    validator: res.delegation.unwrap().validator_address,
-                    amount:    res.balance.unwrap().amount.parse().unwrap(),
-                }),
-        );
-
+        delegations.extend(response.delegation_responses);
         next = response.pagination.unwrap().next_key;
+
         if next.is_empty() {
             break;
         }
     }
 
-    println!("{}", serde_json::to_string_pretty(&delegations)?);
+    // DelegationResponse doesn't implement serde::Serialize, so we can't print
+    // it out in pretty JSON as we can for the other two languages
+    dbg!(delegations);
 
     Ok(())
 }
